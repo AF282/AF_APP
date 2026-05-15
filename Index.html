@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="AF"/>
+<meta name="theme-color" id="tc-meta" content="#0d0d1a"/>
+<title>AF – Registro Ore</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;900&family=Noto+Sans+Arabic:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root{--red:#e74c3c;--red2:#c0392b;--blue:#3498db;--green:#2ecc71;--orange:#e67e22;--bg:#0d0d1a;--bg2:#16162a;--bg3:#1e1e38;--border:#2a2a48;--text:#e8e8f4;--muted:#6b6b8a;--shadow:0 2px 14px rgba(0,0,0,.45);--st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px)}
+body.light{--bg:#f0f2f8;--bg2:#fff;--bg3:#e8eaf2;--border:#d0d4e8;--text:#1a1a2e;--muted:#7880a0;--shadow:0 2px 14px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);overflow:hidden}
+body{font-family:'Barlow',sans-serif;color:var(--text);display:flex;flex-direction:column;transition:background .2s,color .2s}
+body.ar{font-family:'Noto Sans Arabic',sans-serif;direction:rtl}
+#login-screen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:999;padding:20px}
+.lbox{background:var(--bg2);border-radius:20px;padding:28px 22px;width:100%;max-width:360px;border:1px solid var(--border);box-shadow:var(--shadow);position:relative}
+.llogo{font-size:50px;font-weight:900;color:var(--red);letter-spacing:-3px;text-align:center;margin-bottom:3px}
+.lco{text-align:center;font-size:11px;color:var(--muted);margin-bottom:22px;line-height:1.5}
+.l-lang-btn{position:absolute;top:16px;right:16px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--muted);padding:5px 10px;font-size:11px;cursor:pointer;font-family:inherit}
+body.ar .l-lang-btn{right:auto;left:16px}
+.ltabs{display:flex;gap:0;background:var(--bg3);border-radius:10px;padding:3px;margin-bottom:18px}
+.ltab{flex:1;padding:9px;font-size:12px;font-weight:700;border:none;border-radius:8px;background:none;color:var(--muted);cursor:pointer;font-family:inherit;transition:.2s}
+.ltab.on{background:var(--red);color:#fff}
+.lf{margin-bottom:13px}
+.lf label{font-size:9px;color:var(--muted);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.lf input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:12px 13px;font-size:15px;font-family:inherit}
+.lf input:focus{outline:none;border-color:var(--red)}
+.lbtn{width:100%;background:var(--red);border:none;border-radius:12px;color:#fff;padding:13px;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;margin-top:3px}
+.lerr{color:var(--red);font-size:12px;text-align:center;margin-top:9px;min-height:18px}
+.loff{text-align:center;margin-top:14px}
+.loff button{background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;text-decoration:underline;font-family:inherit}
+.fb-note{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:11px 13px;margin-top:14px;font-size:10px;color:var(--muted);line-height:1.6}
+.fb-note strong{color:var(--orange)}
+.header{background:linear-gradient(180deg,var(--bg2),var(--bg));border-bottom:2px solid var(--red);padding:calc(var(--st) + 10px) 14px 10px;flex-shrink:0}
+.hrow1{display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:32px;font-weight:900;color:var(--red);letter-spacing:-2px;line-height:1}
+.logo-sub{font-size:10px;color:var(--muted);font-weight:500;margin-left:7px;vertical-align:middle}
+body.ar .logo-sub{margin-left:0;margin-right:7px}
+.hbtns{display:flex;gap:5px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.ib{background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--muted);padding:6px 9px;font-size:11px;cursor:pointer;font-family:inherit}
+.co-line{font-size:10px;color:var(--muted);font-weight:600;margin-top:5px}
+.hrow3{display:flex;align-items:center;gap:8px;margin-top:5px;flex-wrap:wrap}
+.wbadge{display:inline-flex;align-items:center;gap:5px;background:var(--red);color:#fff;border-radius:20px;padding:3px 11px;font-size:11px;font-weight:700;cursor:pointer}
+.sdot{font-size:10px;color:var(--green)}
+.mbar{background:var(--bg2);padding:9px 13px;display:flex;gap:7px;align-items:center;border-bottom:1px solid var(--border);flex-shrink:0;flex-wrap:wrap}
+.msel{background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:8px 9px;font-size:13px;font-family:inherit;flex:1;appearance:none;-webkit-appearance:none;min-width:70px}
+.badd{background:var(--red);border:none;border-radius:8px;color:#fff;padding:8px 13px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
+.erow{display:flex;gap:6px;width:100%}
+.ebtn{flex:1;border:1px solid;border-radius:8px;padding:7px 5px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;text-align:center;background:none;white-space:nowrap}
+.ebtn.pdf{border-color:var(--red);color:var(--red)}.ebtn.xls{border-color:var(--green);color:var(--green)}.ebtn.bak{border-color:var(--muted);color:var(--muted)}
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:11px 11px calc(var(--sb)+11px)}
+.scroll::-webkit-scrollbar{width:2px}.scroll::-webkit-scrollbar-thumb{background:var(--border)}
+.empty{text-align:center;padding:56px 20px;color:var(--muted)}.empty .ei{font-size:50px;margin-bottom:12px}.empty p{font-size:14px;line-height:1.7}
+.otbar{background:#e74c3c18;border:1px solid #e74c3c40;border-radius:10px;padding:10px 13px;margin-bottom:9px;display:flex;justify-content:space-between}
+.otbi label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;display:block}.otbi .otv{font-size:15px;font-weight:900}
+.dc{background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;overflow:hidden;box-shadow:var(--shadow)}
+.dc.ot{border-color:#e74c3c50}
+.dc-h{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--bg3);border-bottom:1px solid var(--border)}
+.dc-date{font-size:13px;font-weight:700}.dc-day{font-size:10px;color:var(--muted);margin-top:1px}
+.dc-acts{display:flex;gap:2px}
+.dca{background:var(--bg);border:1px solid var(--border);border-radius:8px;font-size:16px;cursor:pointer;padding:6px 10px;color:var(--muted);line-height:1;min-width:36px;min-height:36px;display:flex;align-items:center;justify-content:center}
+.dca:active{opacity:.6}
+.dc-b{padding:9px 12px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.ds label{font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;display:block;margin-bottom:2px}
+.ds .v{font-size:13px;font-weight:700}.vt{color:var(--text)}.vh{color:#5dade2}.vh.ot{color:var(--red)}.ve{color:var(--green)}
+.otchip{display:inline-block;background:#e74c3c20;color:var(--red);border-radius:4px;padding:1px 5px;font-size:9px;font-weight:700;margin-top:2px}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+.tcard{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:13px;text-align:center;box-shadow:var(--shadow)}
+.tcard.acc{border-color:#e74c3c44}
+.tcard label{font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:4px}
+.tcard .big{font-size:23px;font-weight:900;line-height:1}.tcard .sub{font-size:9px;color:var(--muted);margin-top:3px}
+.tc-days .big{color:var(--green)}.tc-h .big{color:#5dade2}.tc-ot .big{color:var(--orange)}.tc-m .big{color:var(--red)}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.82);display:flex;align-items:flex-end;z-index:300}
+.sh{background:var(--bg2);border-radius:20px 20px 0 0;width:100%;padding:17px 17px calc(var(--sb)+17px);border-top:2px solid var(--red);max-height:93vh;overflow-y:auto}
+.handle{width:34px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 15px}
+.sh-title{font-size:17px;font-weight:800;margin-bottom:15px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ff{grid-column:1/-1}
+.fld label{font-size:9px;color:var(--muted);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.fld input,.fld select{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:11px 12px;font-size:15px;font-family:inherit;appearance:none;-webkit-appearance:none}
+.fld input:focus,.fld select:focus{outline:none;border-color:var(--red)}
+.pvbox{background:var(--bg);border-radius:10px;padding:11px 13px;display:flex;justify-content:space-around;margin:11px 0}
+.pvbox span{font-size:12px;color:var(--muted)}
+.brow{display:flex;gap:8px;margin-top:3px}
+.bsave{background:var(--red);border:none;border-radius:12px;color:#fff;padding:13px;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;flex:1}
+.bcancel{background:var(--bg3);border:1px solid var(--border);border-radius:12px;color:var(--muted);padding:13px 16px;font-size:15px;cursor:pointer;font-family:inherit}
+.wlist{display:flex;flex-direction:column;gap:7px;margin-bottom:13px}
+.wi{display:flex;justify-content:space-between;align-items:center;background:var(--bg3);border-radius:10px;padding:10px 13px;border:1px solid var(--border);cursor:pointer}
+.wi.sel{border-color:var(--red)}.wi .wn{font-size:14px;font-weight:700}.wi .wr{font-size:11px;color:var(--muted)}
+.wi-btns{display:flex;gap:6px;align-items:center}
+.wia{background:var(--bg);border:1px solid var(--border);border-radius:7px;font-size:14px;cursor:pointer;color:var(--muted);padding:5px 8px;min-width:32px;min-height:32px;display:flex;align-items:center;justify-content:center}
+.wadd{background:var(--bg3);border:1px dashed var(--border);border-radius:10px;color:var(--muted);padding:12px;width:100%;font-size:13px;cursor:pointer;font-family:inherit}
+.stgr{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)}
+.stgi{background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:7px 10px;font-size:14px;width:100px;font-family:inherit;text-align:center;appearance:none}
+.tog{position:relative;width:42px;height:23px;flex-shrink:0}
+.tog input{opacity:0;width:0;height:0}
+.tsl{position:absolute;inset:0;background:var(--border);border-radius:12px;transition:.25s;cursor:pointer}
+.tsl:before{content:'';position:absolute;width:17px;height:17px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.25s}
+input:checked+.tsl{background:var(--red)}input:checked+.tsl:before{transform:translateX(19px)}
+.bbtn{display:block;width:100%;padding:13px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:9px;border:none;text-align:center}
+.bb-exp{background:var(--blue);color:#fff}.bb-imp{background:var(--bg3);color:var(--text);border:1px solid var(--border)}
+.confirm-ov{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:500;padding:20px}
+.confirm-box{background:var(--bg2);border-radius:16px;padding:24px 20px;width:100%;max-width:300px;border:1px solid var(--border);text-align:center}
+.confirm-box .cm{font-size:14px;line-height:1.6;margin-bottom:20px}
+.confirm-box .crow{display:flex;gap:10px}
+.cbtn-ok{flex:1;background:var(--red);border:none;border-radius:10px;color:#fff;padding:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.cbtn-no{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:10px;color:var(--muted);padding:12px;font-size:14px;cursor:pointer;font-family:inherit}
+</style>
+</head>
+<body>
+<div id="login-screen">
+<div class="lbox">
+<button class="l-lang-btn" id="l-lang-btn" onclick="toggleLangLogin()">🇸🇦 AR</button>
+<div class="llogo">AF</div>
+<div class="lco">Arti Grafiche M. &amp; G. Pirovano<br/><span style="font-size:10px">Ahmed Farag</span></div>
+<div class="ltabs">
+<button class="ltab on" id="tab-li" onclick="swTab('li')">Sign In</button>
+<button class="ltab" id="tab-su" onclick="swTab('su')">Register</button>
+</div>
+<div class="lf"><label>Email</label><input type="email" id="l-em" placeholder="email@example.com" autocomplete="email"/></div>
+<div class="lf"><label>Password</label><input type="password" id="l-pw" placeholder="••••••••" autocomplete="current-password"/></div>
+<div class="lf" id="l-pw2w" style="display:none"><label id="l-pw2-lbl">Confirm Password</label><input type="password" id="l-pw2" placeholder="••••••••"/></div>
+<button class="lbtn" id="l-btn" onclick="doAuth()">Sign In</button>
+<div class="lerr" id="l-err"></div>
+<div class="loff"><button onclick="goOffline()" id="l-off-btn">Continue offline</button></div>
+<div class="fb-note" id="fb-note"><strong>ℹ️ Online sync active</strong> – Firebase connected.</div>
+</div>
+</div>
+<div id="aw" style="display:none;flex:1;flex-direction:column;height:100%">
+<div class="header">
+<div class="hrow1">
+<div class="logo">AF <span class="logo-sub" id="hd-sub">Registro Ore</span></div>
+<div class="hbtns">
+<button class="ib" onclick="toggleLang()" id="btn-lang">🇸🇦 AR</button>
+<button class="ib" onclick="toggleTheme()" id="btn-theme">☀️</button>
+<button class="ib" onclick="openSettings()">⚙️</button>
+<button class="ib" onclick="doOut()">🚪</button>
+</div>
+</div>
+<div class="co-line">Arti Grafiche M. &amp; G. Pirovano</div>
+<div class="hrow3">
+<div class="wbadge" onclick="openWorkers()" id="wbadge">👤 Ahmed Farag ▾</div>
+<span id="sdot" class="sdot"></span>
+</div>
+</div>
+<div class="mbar">
+<select class="msel" id="sel-month" onchange="renderAll()"></select>
+<select class="msel" id="sel-year" onchange="renderAll()" style="flex:0 0 72px"></select>
+<button class="badd" onclick="openForm(null)" id="btn-add">＋ Day</button>
+<div class="erow" id="erow" style="display:none">
+<button class="ebtn pdf" onclick="exportPDF()" id="btn-pdf">📄 PDF</button>
+<button class="ebtn xls" onclick="exportCSV()" id="btn-xls">📊 Excel</button>
+<button class="ebtn bak" onclick="openBackup()" id="btn-bak">💾 Backup</button>
+</div>
+</div>
+<div class="scroll" id="main-area"></div>
+</div>
+<div class="ov" id="form-modal" style="display:none">
+<div class="sh">
+<div class="handle"></div>
+<div class="sh-title" id="fm-t">Add Day</div>
+<div class="fg">
+<div class="fld ff"><label id="lfd">Date</label><input type="date" id="f-d" oninput="upPv()"/></div>
+<div class="fld"><label id="lfi">Entry</label><input type="time" id="f-i" value="08:00" oninput="upPv()"/></div>
+<div class="fld"><label id="lfo">Exit</label><input type="time" id="f-o" value="19:00" oninput="upPv()"/></div>
+<div class="fld ff"><label id="lfp">Break</label>
+<select id="f-p" onchange="upPv()">
+<option value="0">None</option>
+<option value="0.5">30 min</option>
+<option value="1" selected>1 hour</option>
+</select>
+</div>
+<div class="fld ff"><label id="lfr">€/Hour</label><input type="number" step="0.0001" id="f-r" placeholder="7.4518" oninput="upPv()"/></div>
+<div class="fld ff"><label id="lfn">Notes</label><input type="text" id="f-n" placeholder="..."/></div>
+</div>
+<div class="pvbox"><span id="pv-h">– h</span><span id="pv-ot" style="color:var(--orange)"></span><span id="pv-e">€ –</span></div>
+<div class="brow">
+<button class="bsave" onclick="saveRow()" id="fm-sv">Save</button>
+<button class="bcancel" onclick="closeForm()" id="fm-ca">Cancel</button>
+</div>
+</div>
+</div>
+<div class="ov" id="workers-modal" style="display:none">
+<div class="sh">
+<div class="handle"></div>
+<div class="sh-title" id="wm-t">Workers</div>
+<div class="wlist" id="wlist"></div>
+<button class="wadd" onclick="showWF()" id="wm-add">＋ Add Worker</button>
+<div id="wf" style="display:none;margin-top:12px">
+<div class="fg">
+<div class="fld ff"><label id="wfnl">Name</label><input type="text" id="wf-name"/></div>
+<div class="fld ff"><label id="wfrl">€/h</label><input type="number" step="0.0001" id="wf-rate" placeholder="7.4518"/></div>
+</div>
+<div class="brow" style="margin-top:10px">
+<button class="bsave" onclick="addWorker()" id="wfs">Add</button>
+<button class="bcancel" onclick="document.getElementById('wf').style.display='none'" id="wfc">Cancel</button>
+</div>
+</div>
+</div>
+</div>
+<div class="ov" id="settings-modal" style="display:none">
+<div class="sh">
+<div class="handle"></div>
+<div class="sh-title" id="stg-t">Settings</div>
+<div class="stgr"><div id="stg-rl">Default Rate €/h</div><input type="number" step="0.0001" id="stg-rate" class="stgi" value="7.4518"/></div>
+<div class="stgr"><div id="stg-sl">Official hours/day</div><input type="number" step="0.5" id="stg-std" class="stgi" value="8"/></div>
+<div class="stgr"><div id="stg-otl">Show Overtime</div><label class="tog"><input type="checkbox" id="stg-ot" checked/><span class="tsl"></span></label></div>
+<div class="stgr"><div id="stg-thl">Light Mode</div><label class="tog"><input type="checkbox" id="stg-th" onchange="applyTT()"/><span class="tsl"></span></label></div>
+<div class="brow" style="margin-top:16px">
+<button class="bsave" onclick="saveSettings()" id="stg-sv">Save</button>
+<button class="bcancel" onclick="closeModal('settings-modal')" id="stg-ca">Cancel</button>
+</div>
+</div>
+</div>
+<div class="ov" id="backup-modal" style="display:none">
+<div class="sh">
+<div class="handle"></div>
+<div class="sh-title" id="bk-t">Backup</div>
+<button class="bbtn bb-exp" onclick="doExport()" id="bk-exp">📤 Export JSON</button>
+<button class="bbtn bb-imp" onclick="document.getElementById('bkf').click()" id="bk-imp">📥 Import JSON</button>
+<input type="file" id="bkf" accept=".json" style="display:none" onchange="doImport(event)"/>
+</div>
+</div>
+<div class="confirm-ov" id="confirm-ov" style="display:none">
+<div class="confirm-box">
+<div class="cm" id="confirm-msg">Are you sure?</div>
+<div class="crow">
+<button class="cbtn-ok" id="confirm-ok">Delete</button>
+<button class="cbtn-no" onclick="closeConfirm()">Cancel</button>
+</div>
+</div>
+</div>
+<script>
+const LSK='af_v4';
+function loadS(){try{return JSON.parse(localStorage.getItem(LSK)||'{}')}catch(e){return{}}}
+function saveLS(){localStorage.setItem(LSK,JSON.stringify(S))}
+let S=loadS();
+if(!S.workers)S.workers=[{id:'w1',name:'Ahmed Farag',rate:7.4518}];
+if(!S.activeWorker)S.activeWorker=S.workers[0].id;
+if(!S.data)S.data={};
+if(!S.settings)S.settings={stdHours:8,showOT:true};
+if(!S.lang)S.lang='it';
+if(!S.theme)S.theme='dark';
+let lang=S.lang,editId=null,authMode='li',fbUser=null,stout=null;
+const TR={
+it:{sub:'Registro Ore',addDay:'＋ Giorno',langBtn:'🇸🇦 AR',months:['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'],days:['Dom','Lun','Mar','Mer','Gio','Ven','Sab'],popt:{'0':'Nessuna','0.5':'30 min','1':'1 ora'},fmAdd:'Aggiungi Giorno',fmEdit:'Modifica Giorno',fDate:'Data',fIn:'Entrata',fOut:'Uscita',fPausa:'Pausa',fRate:'€/Ora',fNote:'Note',save:'Salva',cancel:'Annulla',stgT:'Impostazioni',stgR:'Tariffa €/h',stgS:'Ore ufficiali/giorno',stgOT:'Mostra Straordinari',stgTh:'Modalità Chiara',tOre:'Totale Ore',tMese:'Totale Mese',tOT:'Straordinari',tDays:'Giorni',noData:'Nessun dato.\nPremi ＋ Giorno!',perH:'/h',wT:'Lavoratori',wAdd:'＋ Aggiungi',wNL:'Nome',wRL:'€/h',addW:'Aggiungi',bkT:'Backup',bkE:'📤 Esporta JSON',bkI:'📥 Importa JSON',pdfBtn:'📄 PDF',xlsBtn:'📊 Excel',bakBtn:'💾 Backup',cDel:'Eliminare questa giornata?',cDelW:'Eliminare questo lavoratore?',delBtn:'Elimina',cancelBtn:'Annulla',signIn:'Accedi',register:'Registrati',confirmPw:'Conferma Password',offlineBtn:'Continua offline',syncOk:'Sincronizzato',syncing:'Salvataggio...',loginTab:'Accedi',regTab:'Registrati',langSwitch:'🇸🇦 AR',fbNote:'<strong>✅ Online:</strong> Sincronizzazione Firebase attiva.'},
+ar:{sub:'سجل ساعات العمل',addDay:'＋ يوم',langBtn:'🇮🇹 IT',months:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],days:['أح','إث','ث','أر','خ','ج','س'],popt:{'0':'بدون','0.5':'30 دقيقة','1':'ساعة'},fmAdd:'إضافة يوم',fmEdit:'تعديل يوم',fDate:'التاريخ',fIn:'دخول',fOut:'خروج',fPausa:'استراحة',fRate:'€/ساعة',fNote:'ملاحظة',save:'حفظ',cancel:'إلغاء',stgT:'الإعدادات',stgR:'السعر الساعي',stgS:'ساعات رسمية/يوم',stgOT:'عرض الإضافي',stgTh:'الوضع الفاتح',tOre:'إجمالي الساعات',tMese:'إجمالي الشهر',tOT:'ساعات إضافية',tDays:'أيام',noData:'لا توجد بيانات.\nاضغط ＋ يوم!',perH:'/ساعة',wT:'الموظفون',wAdd:'＋ إضافة',wNL:'الاسم',wRL:'€/ساعة',addW:'إضافة',bkT:'نسخة احتياطية',bkE:'📤 تصدير JSON',bkI:'📥 استيراد JSON',pdfBtn:'📄 PDF',xlsBtn:'📊 Excel',bakBtn:'💾 باك أب',cDel:'حذف هذا اليوم؟',cDelW:'حذف هذا الموظف؟',delBtn:'حذف',cancelBtn:'إلغاء',signIn:'دخول',register:'تسجيل',confirmPw:'تأكيد كلمة المرور',offlineBtn:'بدون انترنت',syncOk:'محفوظ',syncing:'جاري الحفظ...',loginTab:'دخول',regTab:'تسجيل',langSwitch:'🇮🇹 IT',fbNote:'<strong>✅ متصل:</strong> Firebase نشط.'}
+};
+const t=k=>(TR[lang]||TR.it)[k]||k;
+function toD(s){if(!s)return null;const[h,m]=s.split(':').map(Number);return h+m/60}
+function calcH(i,o,p){const a=toD(i),b=toD(o);if(a===null||b===null)return 0;return Math.max(0,parseFloat((b-a-parseFloat(p||0)).toFixed(4)))}
+function calcOT(h){return Math.max(0,parseFloat((h-(S.settings.stdHours||8)).toFixed(4)))}
+function getDN(ds){if(!ds)return '';return t('days')[new Date(ds).getDay()]}
+function mkey(){const m=document.getElementById('sel-month').value,y=document.getElementById('sel-year').value;return`${y}-${String(parseInt(m)+1).padStart(2,'0')}`}
+function getRows(){return(S.data[S.activeWorker]||{})[mkey()]||[]}
+function setRows(r){if(!S.data[S.activeWorker])S.data[S.activeWorker]={};S.data[S.activeWorker][mkey()]=r}
+function aw(){return S.workers.find(w=>w.id===S.activeWorker)||S.workers[0]}
+function getDR(){return parseFloat((aw()||{}).rate||7.4518)}
+function genId(){return Date.now().toString(36)+Math.random().toString(36).slice(2)}
+function closeModal(id){document.getElementById(id).style.display='none'}
+let confirmCb=null;
+function showConfirm(msg,cb){document.getElementById('confirm-msg').textContent=msg;document.getElementById('confirm-ok').textContent=t('delBtn');document.getElementById('confirm-ok').onclick=()=>{closeConfirm();cb()};document.getElementById('confirm-ov').style.display='flex';confirmCb=cb}
+function closeConfirm(){document.getElementById('confirm-ov').style.display='none';confirmCb=null}
+function init(){
+const now=new Date();
+const sm=document.getElementById('sel-month'),sy=document.getElementById('sel-year');
+for(let i=0;i<12;i++){const o=document.createElement('option');o.value=i;o.textContent=TR.it.months[i];if(i===now.getMonth())o.selected=true;sm.appendChild(o)}
+[2024,2025,2026,2027,2028].forEach(y=>{const o=document.createElement('option');o.value=y;o.textContent=y;if(y===now.getFullYear())o.selected=true;sy.appendChild(o)});
+applyTheme();updateLoginText();
+loadFirebase();
+}
+function loadFirebase(){
+const s=document.createElement('script');s.type='module';
+s.textContent=`
+import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import{getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import{getFirestore,doc,setDoc,getDoc}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+const cfg={
+  apiKey:'AIzaSyB-LBIBorET-edyhDVPLJxJSJ1HzjlxHhs',
+  authDomain:'af-app-lavoro.firebaseapp.com',
+  projectId:'af-app-lavoro',
+  storageBucket:'af-app-lavoro.firebasestorage.app',
+  messagingSenderId:'615223530634',
+  appId:'1:615223530634:web:5375c7585793bd487d8973'
+};
+const app=initializeApp(cfg);
+const auth=getAuth(app),db=getFirestore(app);
+window._fb={
+  login:(e,p)=>signInWithEmailAndPassword(auth,e,p),
+  signup:(e,p)=>createUserWithEmailAndPassword(auth,e,p),
+  out:()=>signOut(auth),
+  save:async(uid,d)=>setDoc(doc(db,'af_users',uid),{state:JSON.stringify(d)},{merge:true}),
+  load:async uid=>{const s=await getDoc(doc(db,'af_users',uid));return s.exists()?JSON.parse(s.data().state||'{}'):null}
+};
+onAuthStateChanged(auth,user=>window._onAuth(user));
+`;
+document.head.appendChild(s);
+showLogin();
+}
+window._onAuth=async function(user){
+fbUser=user;
+if(user){
+  try{const r=await window._fb.load(user.uid);if(r&&r.workers)mergeRemote(r);}catch(e){}
+  showApp();
+}else{showLogin();}
+};
+function mergeRemote(r){
+if(r.data)Object.keys(r.data).forEach(wid=>{if(!S.data[wid])S.data[wid]={};Object.assign(S.data[wid],r.data[wid])});
+if(r.workers&&r.workers.length)S.workers=r.workers;
+if(r.settings)Object.assign(S.settings,r.settings);
+if(r.lang)lang=r.lang;
+saveLS();
+}
+function scheduleSave(){
+saveLS();
+if(stout)clearTimeout(stout);
+stout=setTimeout(async()=>{
+  if(window._fb&&fbUser){
+    const sd=document.getElementById('sdot');
+    if(sd)sd.textContent='⏫';
+    try{
+      await window._fb.save(fbUser.uid,S);
+      if(sd){sd.textContent='✅';setTimeout(()=>{if(sd)sd.textContent=''},2000);}
+    }catch(e){if(sd)sd.textContent='❌';}
+  }
+},800);
+}
+function showLogin(){document.getElementById('login-screen').style.display='flex';document.getElementById('aw').style.display='none';}
+function showApp(){
+document.getElementById('login-screen').style.display='none';
+const a=document.getElementById('aw');a.style.display='flex';
+applyTheme();applyLang();renderAll();
+}
+function goOffline(){fbUser=null;showApp()}
+function swTab(m){
+authMode=m;
+document.getElementById('tab-li').className='ltab'+(m==='li'?' on':'');
+document.getElementById('tab-su').className='ltab'+(m==='su'?' on':'');
+document.getElementById('l-pw2w').style.display=m==='su'?'block':'none';
+document.getElementById('l-btn').textContent=m==='li'?t('signIn'):t('register');
+document.getElementById('l-err').textContent='';
+}
+function updateLoginText(){
+document.getElementById('tab-li').textContent=t('loginTab');
+document.getElementById('tab-su').textContent=t('regTab');
+document.getElementById('l-btn').textContent=authMode==='li'?t('signIn'):t('register');
+document.getElementById('l-pw2-lbl').textContent=t('confirmPw');
+document.getElementById('l-off-btn').textContent=t('offlineBtn');
+document.getElementById('fb-note').innerHTML=t('fbNote');
+document.getElementById('l-lang-btn').textContent=t('langSwitch');
+}
+function toggleLangLogin(){
+lang=lang==='it'?'ar':'it';S.lang=lang;saveLS();
+document.body.classList.toggle('ar',lang==='ar');
+document.documentElement.lang=lang;
+updateLoginText();
+}
+async function doAuth(){
+const email=document.getElementById('l-em').value.trim();
+const pass=document.getElementById('l-pw').value;
+const err=document.getElementById('l-err');
+err.textContent='';
+if(!email||!pass){err.textContent=lang==='ar'?'أدخل البريد وكلمة المرور':'Inserisci email e password';return}
+if(!window._fb){goOffline();return}
+try{
+  if(authMode==='su'){
+    const p2=document.getElementById('l-pw2').value;
+    if(pass!==p2){err.textContent=lang==='ar'?'كلمات المرور غير متطابقة':'Password non coincidono';return}
+    if(pass.length<6){err.textContent=lang==='ar'?'6 أحرف على الأقل':'Min 6 caratteri';return}
+    await window._fb.signup(email,pass);
+  }else{await window._fb.login(email,pass)}
+}catch(e){err.textContent=fbErr(e.code)}
+}
+function fbErr(c){
+const m={
+  'auth/user-not-found':lang==='ar'?'مستخدم غير موجود':'Utente non trovato',
+  'auth/wrong-password':lang==='ar'?'كلمة مرور خاطئة':'Password errata',
+  'auth/email-already-in-use':lang==='ar'?'البريد مستخدم':'Email già usata',
+  'auth/invalid-email':lang==='ar'?'بريد غير صالح':'Email non valida',
+  'auth/weak-password':lang==='ar'?'كلمة مرور ضعيفة':'Password debole',
+  'auth/invalid-credential':lang==='ar'?'بيانات خاطئة':'Credenziali errate',
+  'auth/network-request-failed':lang==='ar'?'خطأ في الشبكة':'Errore rete'
+};
+return m[c]||(lang==='ar'?'خطأ: ':'Errore: ')+c;
+}
+function doOut(){if(window._fb&&fbUser)window._fb.out();else showLogin()}
+function renderAll(){
+const rows=getRows();
+const area=document.getElementById('main-area');
+document.getElementById('erow').style.display=rows.length?'flex':'none';
+const w=aw();document.getElementById('wbadge').textContent='👤 '+(w?w.name:'–')+' ▾';
+const sm=document.getElementById('sel-month');for(let i=0;i<sm.options.length;i++)sm.options[i].textContent=TR[lang].months[i];
+if(!rows.length){area.innerHTML=`<div class="empty"><div class="ei">📋</div><p>${t('noData').replace('\n','<br/>')}</p></div>`;return}
+const showOT=S.settings.showOT!==false,dr=getDR();
+let tH=0,tE=0,tOT=0,days=0;
+rows.forEach(r=>{const h=calcH(r.i,r.o,r.p);tH+=h;tE+=h*parseFloat(r.r||dr);tOT+=calcOT(h);days++});
+let html='';
+if(showOT&&tOT>0)html+=`<div class="otbar"><div class="otbi"><label>${t('tOT')}</label><div class="otv" style="color:var(--orange)">${tOT.toFixed(2)} h</div></div><div class="otbi" style="text-align:right"><label>${t('tDays')}</label><div class="otv" style="color:var(--green)">${days}</div></div></div>`;
+rows.forEach(r=>{
+const h=calcH(r.i,r.o,r.p),e=h*parseFloat(r.r||dr),ot=calcOT(h);
+const pl=TR[lang].popt[String(r.p)]||r.p+'h',hasOT=ot>0&&showOT;
+html+=`<div class="dc${hasOT?' ot':''}" data-id="${r.id}">
+<div class="dc-h">
+<div><div class="dc-date">${r.d||''}</div><div class="dc-day">${getDN(r.d)}</div></div>
+<div class="dc-acts"><button class="dca edit-btn">✏️</button><button class="dca del-btn">🗑</button></div>
+</div>
+<div class="dc-b">
+<div class="ds"><label>${t('fIn')}</label><div class="v vt">${r.i||'-'}</div></div>
+<div class="ds"><label>${t('fOut')}</label><div class="v vt">${r.o||'-'}</div></div>
+<div class="ds"><label>${t('fPausa')}</label><div class="v vt" style="font-size:11px">${pl}</div></div>
+<div class="ds"><label>${lang==='it'?'Ore':'ساعات'}</label><div class="v vh${hasOT?' ot':''}">${h.toFixed(2)}h</div>${hasOT?`<span class="otchip">+${ot.toFixed(2)}h</span>`:''}</div>
+<div class="ds" style="grid-column:span 2"><label>${t('tMese')}</label><div class="v ve">€ ${e.toFixed(2)}</div>${r.note?`<div style="font-size:9px;color:var(--muted);margin-top:2px">${r.note}</div>`:''}</div>
+</div></div>`;
+});
+html+=`<div class="tgrid">
+<div class="tcard tc-days"><label>${t('tDays')}</label><div class="big">${days}</div></div>
+<div class="tcard tc-h"><label>${t('tOre')}</label><div class="big">${tH.toFixed(2)}</div><div class="sub">h</div></div>
+${showOT?`<div class="tcard tc-ot"><label>${t('tOT')}</label><div class="big">${tOT.toFixed(2)}</div><div class="sub">h</div></div>`:''}
+<div class="tcard tc-m acc" style="${showOT?'':'grid-column:span 2'}"><label>${t('tMese')}</label><div class="big">€${tE.toFixed(2)}</div><div class="sub">@ €${dr.toFixed(4)}${t('perH')}</div></div>
+</div>`;
+area.innerHTML=html;
+area.querySelectorAll('.dc').forEach(card=>{
+const id=card.dataset.id;
+card.querySelector('.edit-btn').addEventListener('click',e=>{e.stopPropagation();openForm(id)});
+card.querySelector('.del-btn').addEventListener('click',e=>{e.stopPropagation();delRow(id)});
+});
+}
+function openForm(rid){
+editId=rid;const isE=rid!==null;
+document.getElementById('fm-t').textContent=isE?t('fmEdit'):t('fmAdd');
+document.getElementById('lfd').textContent=t('fDate');
+document.getElementById('lfi').textContent=t('fIn');
+document.getElementById('lfo').textContent=t('fOut');
+document.getElementById('lfp').textContent=t('fPausa');
+document.getElementById('lfr').textContent=t('fRate');
+document.getElementById('lfn').textContent=t('fNote');
+document.getElementById('fm-sv').textContent=t('save');
+document.getElementById('fm-ca').textContent=t('cancel');
+const ps=document.getElementById('f-p');
+ps.innerHTML=Object.entries(TR[lang].popt).map(([v,l])=>`<option value="${v}" ${v==='1'?'selected':''}>${l}</option>`).join('');
+if(isE){
+  const row=getRows().find(r=>r.id===rid);
+  if(!row){editId=null;return}
+  document.getElementById('f-d').value=row.d||'';
+  document.getElementById('f-i').value=row.i||'08:00';
+  document.getElementById('f-o').value=row.o||'19:00';
+  document.getElementById('f-p').value=row.p||'1';
+  document.getElementById('f-r').value=row.r||'';
+  document.getElementById('f-n').value=row.note||'';
+}else{
+  document.getElementById('f-d').value=new Date().toISOString().slice(0,10);
+  document.getElementById('f-i').value='08:00';
+  document.getElementById('f-o').value='19:00';
+  document.getElementById('f-p').value='1';
+  document.getElementById('f-r').value='';
+  document.getElementById('f-n').value='';
+}
+upPv();
+document.getElementById('form-modal').style.display='flex';
+}
+function closeForm(){document.getElementById('form-modal').style.display='none';editId=null}
+function upPv(){
+const h=calcH(document.getElementById('f-i').value,document.getElementById('f-o').value,document.getElementById('f-p').value);
+const r=parseFloat(document.getElementById('f-r').value||getDR()),ot=calcOT(h);
+document.getElementById('pv-h').innerHTML=`<strong style="color:#5dade2">${h.toFixed(2)} h</strong>`;
+document.getElementById('pv-ot').innerHTML=ot>0?`<strong>+${ot.toFixed(2)}h ⚡</strong>`:'';
+document.getElementById('pv-e').innerHTML=`<strong style="color:var(--green)">€ ${(h*r).toFixed(2)}</strong>`;
+}
+function saveRow(){
+const d=document.getElementById('f-d').value;if(!d)return;
+const row={id:editId||genId(),d,i:document.getElementById('f-i').value,o:document.getElementById('f-o').value,p:document.getElementById('f-p').value,r:document.getElementById('f-r').value||'',note:document.getElementById('f-n').value||''};
+let rows=getRows();
+if(editId)rows=rows.map(r=>r.id===editId?row:r);else rows.push(row);
+rows.sort((a,b)=>a.d.localeCompare(b.d));
+setRows(rows);scheduleSave();closeForm();renderAll();
+}
+function delRow(id){showConfirm(t('cDel'),()=>{setRows(getRows().filter(r=>r.id!==id));scheduleSave();renderAll();})}
+function openWorkers(){
+document.getElementById('wm-t').textContent=t('wT');
+document.getElementById('wm-add').textContent=t('wAdd');
+document.getElementById('wfnl').textContent=t('wNL');
+document.getElementById('wfrl').textContent=t('wRL');
+document.getElementById('wfs').textContent=t('addW');
+document.getElementById('wfc').textContent=t('cancel');
+document.getElementById('wf').style.display='none';
+renderWL();document.getElementById('workers-modal').style.display='flex';
+}
+function closeWorkers(){closeModal('workers-modal')}
+function renderWL(){
+document.getElementById('wlist').innerHTML=S.workers.map(w=>`
+<div class="wi${w.id===S.activeWorker?' sel':''}" data-wid="${w.id}">
+<div class="w-select-area" style="flex:1;cursor:pointer"><div class="wn">${w.name}</div><div class="wr">€ ${parseFloat(w.rate||7.4518).toFixed(4)}/h</div></div>
+<div class="wi-btns">
+${w.id===S.activeWorker?'<span style="color:var(--red);font-size:18px">✓</span>':''}
+${S.workers.length>1?`<button class="wia del-w-btn">🗑</button>`:''}
+</div></div>`).join('');
+document.getElementById('wlist').querySelectorAll('.wi').forEach(el=>{
+  const wid=el.dataset.wid;
+  el.querySelector('.w-select-area').addEventListener('click',()=>selW(wid));
+  const db=el.querySelector('.del-w-btn');
+  if(db)db.addEventListener('click',e=>{e.stopPropagation();rmW(wid)});
+});
+}
+function selW(id){S.activeWorker=id;scheduleSave();closeWorkers();renderAll()}
+function showWF(){document.getElementById('wf-name').value='';document.getElementById('wf-rate').value='';document.getElementById('wf').style.display='block'}
+function addWorker(){
+const n=document.getElementById('wf-name').value.trim();if(!n)return;
+S.workers.push({id:genId(),name:n,rate:parseFloat(document.getElementById('wf-rate').value||7.4518)});
+scheduleSave();document.getElementById('wf').style.display='none';renderWL();
+}
+function rmW(id){
+showConfirm(t('cDelW'),()=>{
+  S.workers=S.workers.filter(w=>w.id!==id);
+  if(S.activeWorker===id)S.activeWorker=S.workers[0]?.id||'';
+  delete S.data[id];scheduleSave();renderWL();renderAll();
+});
+}
+function openSettings(){
+document.getElementById('stg-t').textContent=t('stgT');
+document.getElementById('stg-rl').textContent=t('stgR');
+document.getElementById('stg-sl').textContent=t('stgS');
+document.getElementById('stg-otl').textContent=t('stgOT');
+document.getElementById('stg-thl').textContent=t('stgTh');
+document.getElementById('stg-sv').textContent=t('save');
+document.getElementById('stg-ca').textContent=t('cancel');
+document.getElementById('stg-rate').value=getDR();
+document.getElementById('stg-std').value=S.settings.stdHours||8;
+document.getElementById('stg-ot').checked=S.settings.showOT!==false;
+document.getElementById('stg-th').checked=S.theme==='light';
+document.getElementById('settings-modal').style.display='flex';
+}
+function closeSettings(){closeModal('settings-modal')}
+function saveSettings(){
+const w=aw();if(w)w.rate=parseFloat(document.getElementById('stg-rate').value)||7.4518;
+S.settings.stdHours=parseFloat(document.getElementById('stg-std').value)||8;
+S.settings.showOT=document.getElementById('stg-ot').checked;
+S.theme=document.getElementById('stg-th').checked?'light':'dark';
+scheduleSave();applyTheme();closeSettings();renderAll();
+}
+function applyTT(){S.theme=document.getElementById('stg-th').checked?'light':'dark';applyTheme()}
+function applyTheme(){
+document.body.classList.toggle('light',S.theme==='light');
+document.getElementById('btn-theme').textContent=S.theme==='light'?'🌙':'☀️';
+document.getElementById('tc-meta').content=S.theme==='light'?'#f0f2f8':'#0d0d1a';
+}
+function toggleTheme(){S.theme=S.theme==='dark'?'light':'dark';scheduleSave();applyTheme()}
+function applyLang(){
+document.body.classList.toggle('ar',lang==='ar');
+document.documentElement.lang=lang;
+document.getElementById('hd-sub').textContent=t('sub');
+document.getElementById('btn-lang').textContent=t('langBtn');
+document.getElementById('btn-add').textContent=t('addDay');
+document.getElementById('btn-pdf').textContent=t('pdfBtn');
+document.getElementById('btn-xls').textContent=t('xlsBtn');
+document.getElementById('btn-bak').textContent=t('bakBtn');
+const sm=document.getElementById('sel-month');
+for(let i=0;i<sm.options.length;i++)sm.options[i].textContent=TR[lang].months[i];
+}
+function toggleLang(){lang=lang==='it'?'ar':'it';S.lang=lang;scheduleSave();applyLang();renderAll()}
+function exportPDF(){
+const rows=getRows();if(!rows.length)return;
+const m=parseInt(document.getElementById('sel-month').value),y=document.getElementById('sel-year').value;
+const ml=`${TR[lang].months[m]} ${y}`,isAr=lang==='ar',dr=getDR(),w=aw(),stdH=S.settings.stdHours||8,showOT=S.settings.showOT!==false;
+let tH=0,tE=0,tOT=0;
+const rH=rows.map(r=>{
+  const h=calcH(r.i,r.o,r.p),e=h*parseFloat(r.r||dr),ot=calcOT(h);tH+=h;tE+=e;tOT+=ot;
+  const pl=TR[lang].popt[String(r.p)]||r.p;
+  return`<tr><td>${r.d}</td><td>${getDN(r.d)}</td><td>${r.i||'-'}</td><td>${r.o||'-'}</td><td>${pl}</td><td style="color:${h>stdH?'#e74c3c':'#2980b9'};font-weight:700">${h.toFixed(2)}</td>${showOT?`<td style="color:#e67e22">${ot>0?'+'+ot.toFixed(2):'–'}</td>`:''}<td>€${parseFloat(r.r||dr).toFixed(4)}</td><td style="color:#27ae60;font-weight:700">€${e.toFixed(2)}</td><td style="font-size:9px;color:#999">${r.note||''}</td></tr>`;
+}).join('');
+const html=`<!DOCTYPE html><html ${isAr?'dir="rtl"':''} lang="${lang}"><head><meta charset="UTF-8"/><link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;900&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet"/><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:${isAr?"'Noto Sans Arabic'":"'Barlow'"},sans-serif;font-size:11px;color:#1a1a2e;background:#fff;padding:22px;direction:${isAr?'rtl':'ltr'}}.top{display:flex;justify-content:space-between;border-bottom:3px solid #e74c3c;padding-bottom:12px;margin-bottom:16px}.logo{font-size:38px;font-weight:900;color:#e74c3c;letter-spacing:-2px;line-height:1}.info{text-align:${isAr?'left':'right'}}.cn{font-size:12px;font-weight:700}.wn{font-size:10px;color:#888}.mth{font-size:19px;font-weight:900;margin-bottom:12px}table{width:100%;border-collapse:collapse}th{background:#1a1a2e;color:#fff;padding:8px 5px;font-size:9px;text-transform:uppercase;letter-spacing:.4px}td{padding:7px 5px;border-bottom:1px solid #eee;font-size:10px}tr:nth-child(even) td{background:#f5f5f8}.tots{margin-top:16px;display:flex;justify-content:flex-end;gap:18px;background:#1a1a2e;color:#fff;padding:13px 17px;border-radius:8px;flex-wrap:wrap}.ti label{font-size:9px;opacity:.6;display:block;text-transform:uppercase}.ti span{font-size:18px;font-weight:900;color:#e74c3c}.foot{margin-top:13px;font-size:9px;color:#bbb;text-align:center;border-top:1px solid #eee;padding-top:9px}@media print{@page{margin:8mm}}</style></head><body><div class="top"><div class="logo">AF</div><div class="info"><div class="cn">Arti Grafiche M. &amp; G. Pirovano</div><div class="wn">${w?w.name:'Ahmed Farag'}</div></div></div><div class="mth">${ml}</div><table><thead><tr><th>${t('fDate')}</th><th>${isAr?'اليوم':'Giorno'}</th><th>${t('fIn')}</th><th>${t('fOut')}</th><th>${t('fPausa')}</th><th>${isAr?'ساعات':'Ore'}</th>${showOT?`<th>${t('tOT')}</th>`:''}<th>€/h</th><th>${isAr?'الإجمالي':'Totale'}</th><th>${isAr?'ملاحظة':'Note'}</th></tr></thead><tbody>${rH}</tbody></table><div class="tots"><div class="ti"><label>${t('tOre')}</label><span>${tH.toFixed(2)} h</span></div>${showOT?`<div class="ti"><label>${t('tOT')}</label><span style="color:#e67e22">${tOT.toFixed(2)} h</span></div>`:''}<div class="ti"><label>${t('tMese')}</label><span>€ ${tE.toFixed(2)}</span></div></div><div class="foot">AF – ${w?w.name:'Ahmed Farag'} × Arti Grafiche M. &amp; G. Pirovano | ${ml}</div><script>window.onload=()=>setTimeout(()=>window.print(),350)<\/script></body></html>`;
+const blob=new Blob([html],{type:'text/html'});
+const url=URL.createObjectURL(blob);
+const a=document.createElement('a');a.href=url;a.download=`AF_${(w?w.name:'Ahmed').replace(/\s/g,'_')}_${ml.replace(/\s/g,'_')}.html`;
+document.body.appendChild(a);a.click();document.body.removeChild(a);
+setTimeout(()=>URL.revokeObjectURL(url),5000);
+}
+function exportCSV(){
+const rows=getRows();if(!rows.length)return;
+const m=parseInt(document.getElementById('sel-month').value),y=document.getElementById('sel-year').value;
+const ml=`${TR[lang].months[m]} ${y}`,w=aw(),dr=getDR(),stdH=S.settings.stdHours||8;
+const sep=';';
+const hdr=[t('fDate'),lang==='it'?'Giorno':'اليوم',t('fIn'),t('fOut'),t('fPausa'),lang==='it'?'Ore':'ساعات',t('tOT'),'EUR/h',lang==='it'?'Totale EUR':'الإجمالي',lang==='it'?'Note':'ملاحظة'];
+let tH=0,tE=0,tOT=0;
+const dR=rows.map(r=>{
+  const h=calcH(r.i,r.o,r.p),e=h*parseFloat(r.r||dr),ot=Math.max(0,h-stdH);
+  tH+=h;tE+=e;tOT+=ot;
+  return[r.d,getDN(r.d),r.i,r.o,TR[lang].popt[String(r.p)]||r.p,h.toFixed(2),ot.toFixed(2),parseFloat(r.r||dr).toFixed(4),e.toFixed(2),r.note||''].join(sep);
+});
+const totR=['','','','','',tH.toFixed(2),tOT.toFixed(2),'',tE.toFixed(2),''].join(sep);
+const csv='\uFEFF'+[hdr.join(sep),...dR,'',totR].join('\n');
+const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+const url=URL.createObjectURL(blob);
+const a=document.createElement('a');a.href=url;a.download=`AF_${(w?w.name:'Ahmed').replace(/\s/g,'_')}_${ml.replace(/\s/g,'_')}.csv`;
+document.body.appendChild(a);a.click();document.body.removeChild(a);
+setTimeout(()=>URL.revokeObjectURL(url),3000);
+}
+function openBackup(){
+document.getElementById('bk-t').textContent=t('bkT');
+document.getElementById('bk-exp').textContent=t('bkE');
+document.getElementById('bk-imp').textContent=t('bkI');
+document.getElementById('backup-modal').style.display='flex';
+}
+function closeBackup(){closeModal('backup-modal')}
+function doExport(){
+const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+const url=URL.createObjectURL(blob);
+const a=document.createElement('a');a.href=url;a.download=`AF_Backup_${new Date().toISOString().slice(0,10)}.json`;
+document.body.appendChild(a);a.click();document.body.removeChild(a);
+setTimeout(()=>URL.revokeObjectURL(url),3000);
+}
+function doImport(evt){
+const file=evt.target.files[0];if(!file)return;
+const reader=new FileReader();
+reader.onload=e=>{
+  try{
+    const imp=JSON.parse(e.target.result);
+    if(!imp.workers)throw 0;
+    Object.assign(S,imp);lang=S.lang||'it';
+    scheduleSave();applyTheme();applyLang();closeBackup();renderAll();
+    alert(lang==='it'?'Ripristinato!':'تم الاستيراد!');
+  }catch(e){alert(lang==='it'?'File non valido!':'ملف غير صالح!');}
+};
+reader.readAsText(file);evt.target.value='';
+}
+['form-modal','workers-modal','settings-modal','backup-modal'].forEach(id=>{
+document.getElementById(id).addEventListener('click',function(e){if(e.target===this)this.style.display='none';});
+});
+window.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
