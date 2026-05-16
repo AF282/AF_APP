@@ -88,7 +88,7 @@ body.ar .logo-sub{margin-left:0;margin-right:7px}
 .fld input:focus,.fld select:focus{outline:none;border-color:var(--red)}
 .pvbox{background:var(--bg);border-radius:10px;padding:11px 13px;display:flex;justify-content:space-around;margin:11px 0}
 .pvbox span{font-size:12px;color:var(--muted)}
-.off-warn{background:#5dade220;border:1px solid #5dade240;border-radius:10px;padding:10px 13px;margin-bottom:10px;font-size:13px;color:#5dade2;text-align:center;display:none;font-family:'Noto Sans Arabic',sans-serif}
+.off-warn{background:#5dade220;border:1px solid #5dade240;border-radius:10px;padding:10px 13px;margin-bottom:10px;font-size:13px;color:#5dade2;text-align:center;display:none}
 .off-toggle{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:12px}
 .off-toggle label{font-size:13px;font-weight:600;cursor:pointer}
 .brow{display:flex;gap:8px;margin-top:3px}
@@ -169,9 +169,9 @@ input:checked+.tsl{background:var(--red)}input:checked+.tsl:before{transform:tra
 <div class="sh">
 <div class="handle"></div>
 <div class="sh-title" id="fm-t">Aggiungi Giorno</div>
-<div class="off-warn" id="off-warn">يوم إجازة</div>
+<div class="off-warn" id="off-warn">Day Off</div>
 <div class="off-toggle">
-<label for="f-off" id="f-off-lbl">Giorno di Riposo / يوم إجازة</label>
+<label for="f-off" id="f-off-lbl">Day Off / Giorno di Riposo</label>
 <label class="tog"><input type="checkbox" id="f-off" onchange="toggleOffDay()"/><span class="tsl"></span></label>
 </div>
 <div id="work-fields">
@@ -266,8 +266,8 @@ if(!S.lang)S.lang='it';
 if(!S.theme)S.theme='dark';
 let lang=S.lang,editId=null,authMode='li',fbUser=null,stout=null;
 const TR={
-it:{sub:'Registro Ore',addDay:'＋ Giorno',langBtn:'🇸🇦 AR',months:['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'],days:['Dom','Lun','Mar','Mer','Gio','Ven','Sab'],popt:{'0':'Senza','0.5':'30 min','1':'1 ora'},fmAdd:'Aggiungi Giorno',fmEdit:'Modifica Giorno',fDate:'Data',fIn:'Entrata',fOut:'Uscita',fPausa:'Pausa',fRate:'€/Ora',fNote:'Note',save:'Salva',cancel:'Annulla',stgT:'Impostazioni',stgR:'Tariffa €/h',stgS:'Ore ufficiali/giorno',stgOT:'Mostra Straordinari',stgTh:'Modalità Chiara',tOre:'Totale Ore',tMese:'Totale Mese',tOT:'Straordinari',tDays:'Giorni Lav.',noData:'Nessun dato.\nPremi ＋ Giorno!',perH:'/h',wT:'Lavoratori',wAdd:'＋ Aggiungi',wNL:'Nome',wRL:'€/h',addW:'Aggiungi',bkT:'Backup',bkE:'📤 Esporta JSON',bkI:'📥 Importa JSON',pdfBtn:'📄 PDF',xlsBtn:'📊 Excel',bakBtn:'💾 Backup',cDel:'Eliminare questa giornata?',cDelW:'Eliminare questo lavoratore?',delBtn:'Elimina',cancelBtn:'Annulla',signIn:'Accedi',register:'Registrati',confirmPw:'Conferma Password',offlineBtn:'Continua offline',syncOk:'Sincronizzato',syncing:'Salvataggio...',loginTab:'Accedi',regTab:'Registrati',langSwitch:'🇸🇦 AR',fbNote:'<strong>✅ Online:</strong> Firebase attivo.',offDay:'Riposo',offToggle:'Giorno di Riposo'},
-ar:{sub:'سجل ساعات العمل',addDay:'＋ يوم',langBtn:'🇮🇹 IT',months:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],days:['أح','إث','ث','أر','خ','ج','س'],popt:{'0':'Senza','0.5':'30 دقيقة','1':'ساعة'},fmAdd:'إضافة يوم',fmEdit:'تعديل يوم',fDate:'التاريخ',fIn:'دخول',fOut:'خروج',fPausa:'استراحة',fRate:'€/ساعة',fNote:'ملاحظة',save:'حفظ',cancel:'إلغاء',stgT:'الإعدادات',stgR:'السعر الساعي',stgS:'ساعات رسمية/يوم',stgOT:'عرض الإضافي',stgTh:'الوضع الفاتح',tOre:'إجمالي الساعات',tMese:'إجمالي الشهر',tOT:'ساعات إضافية',tDays:'أيام العمل',noData:'لا توجد بيانات.\nاضغط ＋ يوم!',perH:'/ساعة',wT:'الموظفون',wAdd:'＋ إضافة',wNL:'الاسم',wRL:'€/ساعة',addW:'إضافة',bkT:'نسخة احتياطية',bkE:'📤 تصدير JSON',bkI:'📥 استيراد JSON',pdfBtn:'📄 PDF',xlsBtn:'📊 Excel',bakBtn:'💾 باك أب',cDel:'حذف هذا اليوم؟',cDelW:'حذف هذا الموظف؟',delBtn:'حذف',cancelBtn:'إلغاء',signIn:'دخول',register:'تسجيل',confirmPw:'تأكيد كلمة المرور',offlineBtn:'بدون انترنت',syncOk:'محفوظ',syncing:'جاري الحفظ...',loginTab:'دخول',regTab:'تسجيل',langSwitch:'🇮🇹 IT',fbNote:'<strong>✅ متصل:</strong> Firebase نشط.',offDay:'إجازة',offToggle:'يوم إجازة / Giorno di Riposo'}
+it:{sub:'Registro Ore',addDay:'＋ Giorno',langBtn:'🇸🇦 AR',months:['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'],days:['Dom','Lun','Mar','Mer','Gio','Ven','Sab'],popt:{'0':'Senza','0.5':'30 min','1':'1 ora'},fmAdd:'Aggiungi Giorno',fmEdit:'Modifica Giorno',fDate:'Data',fIn:'Entrata',fOut:'Uscita',fPausa:'Pausa',fRate:'€/Ora',fNote:'Note',save:'Salva',cancel:'Annulla',stgT:'Impostazioni',stgR:'Tariffa €/h',stgS:'Ore ufficiali/giorno',stgOT:'Mostra Straordinari',stgTh:'Modalità Chiara',tOre:'Totale Ore',tMese:'Totale Mese',tOT:'Straordinari',tDays:'Giorni Lav.',noData:'Nessun dato.\nPremi ＋ Giorno!',perH:'/h',wT:'Lavoratori',wAdd:'＋ Aggiungi',wNL:'Nome',wRL:'€/h',addW:'Aggiungi',bkT:'Backup',bkE:'📤 Esporta JSON',bkI:'📥 Importa JSON',pdfBtn:'📄 PDF',xlsBtn:'📊 Excel',bakBtn:'💾 Backup',cDel:'Eliminare questa giornata?',cDelW:'Eliminare questo lavoratore?',delBtn:'Elimina',cancelBtn:'Annulla',signIn:'Accedi',register:'Registrati',confirmPw:'Conferma Password',offlineBtn:'Continua offline',syncOk:'Sincronizzato',syncing:'Salvataggio...',loginTab:'Accedi',regTab:'Registrati',langSwitch:'🇸🇦 AR',fbNote:'<strong>✅ Online:</strong> Firebase attivo.',offDay:'Day Off',offToggle:'Day Off / Giorno di Riposo'},
+ar:{sub:'سجل ساعات العمل',addDay:'＋ يوم',langBtn:'🇮🇹 IT',months:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],days:['أح','إث','ث','أر','خ','ج','س'],popt:{'0':'Senza','0.5':'30 دقيقة','1':'ساعة'},fmAdd:'إضافة يوم',fmEdit:'تعديل يوم',fDate:'التاريخ',fIn:'دخول',fOut:'خروج',fPausa:'استراحة',fRate:'€/ساعة',fNote:'ملاحظة',save:'حفظ',cancel:'إلغاء',stgT:'الإعدادات',stgR:'السعر الساعي',stgS:'ساعات رسمية/يوم',stgOT:'عرض الإضافي',stgTh:'الوضع الفاتح',tOre:'إجمالي الساعات',tMese:'إجمالي الشهر',tOT:'ساعات إضافية',tDays:'أيام العمل',noData:'لا توجد بيانات.\nاضغط ＋ يوم!',perH:'/ساعة',wT:'الموظفون',wAdd:'＋ إضافة',wNL:'الاسم',wRL:'€/ساعة',addW:'إضافة',bkT:'نسخة احتياطية',bkE:'📤 تصدير JSON',bkI:'📥 استيراد JSON',pdfBtn:'📄 PDF',xlsBtn:'📊 Excel',bakBtn:'💾 باك أب',cDel:'حذف هذا اليوم؟',cDelW:'حذف هذا الموظف؟',delBtn:'حذف',cancelBtn:'إلغاء',signIn:'دخول',register:'تسجيل',confirmPw:'تأكيد كلمة المرور',offlineBtn:'بدون انترنت',syncOk:'محفوظ',syncing:'جاري الحفظ...',loginTab:'دخول',regTab:'تسجيل',langSwitch:'🇮🇹 IT',fbNote:'<strong>✅ متصل:</strong> Firebase نشط.',offDay:'Day Off',offToggle:'Day Off / Giorno di Riposo'}
 };
 const t=k=>(TR[lang]||TR.it)[k]||k;
 function toD(s){if(!s)return null;const[h,m]=s.split(':').map(Number);return h+m/60}
@@ -345,17 +345,18 @@ rows.forEach(r=>{
 const isOff=!!r.off;
 const h=isOff?0:calcH(r.i,r.o,r.p),e=h*parseFloat(r.r||dr),ot=isOff?0:calcOT(h);
 const pl=TR[lang].popt[String(r.p)]||r.p+'h',hasOT=ot>0&&showOT;
+const dateVal=r.d||r.d2||'';
 html+=`<div class="dc${hasOT?' ot':''}${isOff?' off':''}" data-id="${r.id}">
 <div class="dc-h">
 <div>
-<div class="dc-date">${r.d||r.d2||''}</div>
-<div class="dc-day">${getDN(r.d||r.d2)}</div>
-${isOff?`<span class="off-badge">${lang==='ar'?'إجازة':'Riposo'}</span>`:''}
+<div class="dc-date">${dateVal}</div>
+<div class="dc-day">${getDN(dateVal)}</div>
+${isOff?`<span class="off-badge">Day Off</span>`:''}
 </div>
 <div class="dc-acts"><button class="dca edit-btn">✏️</button><button class="dca del-btn">🗑</button></div>
 </div>
 <div class="dc-b">
-${isOff?`<div class="ds" style="grid-column:span 3;text-align:center;color:#5dade2;font-size:13px;padding:8px 0">${lang==='ar'?'يوم إجازة':'Giorno di Riposo'}${r.note?` – ${r.note}`:''}</div>`:`
+${isOff?`<div class="ds" style="grid-column:span 3;text-align:center;color:#5dade2;font-size:13px;padding:8px 0">Day Off${r.note?` – ${r.note}`:''}</div>`:`
 <div class="ds"><label>${t('fIn')}</label><div class="v vt">${r.i||'-'}</div></div>
 <div class="ds"><label>${t('fOut')}</label><div class="v vt">${r.o||'-'}</div></div>
 <div class="ds"><label>${t('fPausa')}</label><div class="v vt" style="font-size:11px">${pl}</div></div>
@@ -393,7 +394,6 @@ document.getElementById('fm-sv').textContent=t('save');document.getElementById('
 document.getElementById('f-off-lbl').textContent=t('offToggle');
 const ps=document.getElementById('f-p');
 ps.innerHTML=Object.entries(TR[lang].popt).map(([v,l])=>`<option value="${v}" ${v==='1'?'selected':''}>${l}</option>`).join('');
-// reset
 document.getElementById('f-off').checked=false;
 document.getElementById('work-fields').style.display='block';
 document.getElementById('off-fields').style.display='none';
@@ -473,16 +473,58 @@ const rH=rows.map(r=>{
 const isOff=!!r.off;
 const h=isOff?0:calcH(r.i,r.o,r.p),e=h*parseFloat(r.r||dr),ot=isOff?0:calcOT(h);
 tH+=h;tE+=e;tOT+=ot;
-const pl=isOff?(isAr?'إجازة':'Riposo'):(TR[lang].popt[String(r.p)]||r.p);
+const pl=isOff?'–':(TR[lang].popt[String(r.p)]||r.p);
 const dateVal=r.d||r.d2||'';
-return`<tr${isOff?' style="background:#5dade210"':''}><td>${dateVal}</td><td>${getDN(dateVal)}</td><td>${isOff?'–':r.i||'-'}</td><td>${isOff?'–':r.o||'-'}</td><td>${pl}</td><td style="color:${isOff?'#5dade2':h>stdH?'#e74c3c':'#2980b9'};font-weight:700">${isOff?(isAr?'إجازة':'Rip.'):h.toFixed(2)}</td>${showOT?`<td style="color:#e67e22">${isOff?'–':ot>0?'+'+ot.toFixed(2):'–'}</td>`:''}<td>${isOff?'–':'€'+parseFloat(r.r||dr).toFixed(4)}</td><td style="color:#27ae60;font-weight:700">${isOff?'–':'€'+e.toFixed(2)}</td><td style="font-size:9px;color:#999">${r.note||''}</td></tr>`;
+return`<tr${isOff?' style="background:#f0f7ff"':''}><td>${dateVal}</td><td>${getDN(dateVal)}</td><td>${isOff?'–':r.i||'-'}</td><td>${isOff?'–':r.o||'-'}</td><td>${pl}</td><td style="color:${isOff?'#5dade2':h>stdH?'#e74c3c':'#2980b9'};font-weight:700">${isOff?'–':h.toFixed(2)}</td>${showOT?`<td style="color:#e67e22">${isOff?'–':ot>0?'+'+ot.toFixed(2):'–'}</td>`:''}<td>${isOff?'–':'€'+parseFloat(r.r||dr).toFixed(4)}</td><td style="color:#27ae60;font-weight:700">${isOff?'–':'€'+e.toFixed(2)}</td><td style="font-size:9px;color:#999">${r.note||''}</td></tr>`;
 }).join('');
-// Build print window for real PDF via browser print dialog
-const printHTML=`<!DOCTYPE html><html ${isAr?'dir="rtl"':''} lang="${lang}"><head><meta charset="UTF-8"/><link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;900&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet"/><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:${isAr?"'Noto Sans Arabic'":"'Barlow'"},sans-serif;font-size:11px;color:#1a1a2e;background:#fff;padding:22px;direction:${isAr?'rtl':'ltr'}}.top{display:flex;justify-content:space-between;border-bottom:3px solid #e74c3c;padding-bottom:12px;margin-bottom:16px}.logo{font-size:38px;font-weight:900;color:#e74c3c;letter-spacing:-2px;line-height:1}.info{text-align:${isAr?'left':'right'}}.cn{font-size:12px;font-weight:700}.wn{font-size:10px;color:#888}.mth{font-size:19px;font-weight:900;margin-bottom:12px}table{width:100%;border-collapse:collapse}th{background:#1a1a2e;color:#fff;padding:8px 5px;font-size:9px;text-transform:uppercase;letter-spacing:.4px}td{padding:7px 5px;border-bottom:1px solid #eee;font-size:10px}.tots{margin-top:16px;display:flex;justify-content:flex-end;gap:18px;background:#1a1a2e;color:#fff;padding:13px 17px;border-radius:8px;flex-wrap:wrap}.ti label{font-size:9px;opacity:.6;display:block;text-transform:uppercase}.ti span{font-size:18px;font-weight:900;color:#e74c3c}.foot{margin-top:13px;font-size:9px;color:#bbb;text-align:center;border-top:1px solid #eee;padding-top:9px}@media print{@page{size:A4;margin:10mm}body{padding:0}}</style></head><body><div class="top"><div class="logo">AF</div><div class="info"><div class="cn">Arti Grafiche M. &amp; G. Pirovano</div><div class="wn">${w?w.name:'Ahmed Farag'}</div></div></div><div class="mth">${ml}</div><table><thead><tr><th>${t('fDate')}</th><th>${isAr?'اليوم':'Giorno'}</th><th>${t('fIn')}</th><th>${t('fOut')}</th><th>${t('fPausa')}</th><th>${isAr?'ساعات':'Ore'}</th>${showOT?`<th>${t('tOT')}</th>`:''}<th>€/h</th><th>${isAr?'الإجمالي':'Totale'}</th><th>${isAr?'ملاحظة':'Note'}</th></tr></thead><tbody>${rH}</tbody></table><div class="tots"><div class="ti"><label>${t('tOre')}</label><span>${tH.toFixed(2)} h</span></div>${showOT?`<div class="ti"><label>${t('tOT')}</label><span style="color:#e67e22">${tOT.toFixed(2)} h</span></div>`:''}<div class="ti"><label>${t('tMese')}</label><span>€ ${tE.toFixed(2)}</span></div></div><div class="foot">AF – ${w?w.name:'Ahmed Farag'} × Arti Grafiche M. &amp; G. Pirovano | ${ml}</div><script>window.onload=function(){window.print();setTimeout(()=>window.close(),1000)}<\/script></body></html>`;
-const pw=window.open('','_blank','width=800,height=600');
+const wName=(w?w.name:'Ahmed Farag').toUpperCase();
+const printHTML=`<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;900&display=swap" rel="stylesheet"/><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Barlow',sans-serif;font-size:11px;color:#1a1a2e;background:#fff;padding:22px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #e74c3c;padding-bottom:14px;margin-bottom:18px}
+.info-left{display:flex;flex-direction:column;gap:3px}
+.company{font-size:14px;font-weight:900;color:#1a1a2e;text-transform:uppercase;letter-spacing:1px}
+.worker{font-size:11px;font-weight:600;color:#555;letter-spacing:.5px}
+.logo{font-size:42px;font-weight:900;color:#e74c3c;letter-spacing:-2px;line-height:1}
+.mth{font-size:20px;font-weight:900;margin-bottom:14px;color:#1a1a2e}
+table{width:100%;border-collapse:collapse}
+th{background:#1a1a2e;color:#fff;padding:8px 5px;font-size:9px;text-transform:uppercase;letter-spacing:.4px}
+td{padding:7px 5px;border-bottom:1px solid #eee;font-size:10px}
+tr:nth-child(even) td{background:#f9f9fc}
+.tots{margin-top:16px;display:flex;justify-content:flex-end;gap:18px;background:#1a1a2e;color:#fff;padding:13px 17px;border-radius:8px;flex-wrap:wrap}
+.ti label{font-size:9px;opacity:.6;display:block;text-transform:uppercase;letter-spacing:.5px}
+.ti span{font-size:18px;font-weight:900;color:#e74c3c}
+.foot{margin-top:13px;font-size:9px;color:#bbb;text-align:center;border-top:1px solid #eee;padding-top:9px}
+@media print{@page{size:A4;margin:10mm}body{padding:0}}
+</style></head><body>
+<div class="top">
+<div class="info-left">
+<div class="company">ARTI GRAFICHE M. &amp; G. PIROVANO</div>
+<div class="worker">${wName}</div>
+</div>
+<div class="logo">AF</div>
+</div>
+<div class="mth">${ml}</div>
+<table><thead><tr>
+<th>${t('fDate')}</th><th>${isAr?'اليوم':'Giorno'}</th>
+<th>${t('fIn')}</th><th>${t('fOut')}</th><th>${t('fPausa')}</th>
+<th>${isAr?'ساعات':'Ore'}</th>
+${showOT?`<th>${t('tOT')}</th>`:''}
+<th>€/h</th><th>${isAr?'الإجمالي':'Totale'}</th>
+<th>${isAr?'ملاحظة':'Note'}</th>
+</tr></thead><tbody>${rH}</tbody></table>
+<div class="tots">
+<div class="ti"><label>${t('tOre')}</label><span>${tH.toFixed(2)} h</span></div>
+${showOT?`<div class="ti"><label>${t('tOT')}</label><span style="color:#e67e22">${tOT.toFixed(2)} h</span></div>`:''}
+<div class="ti"><label>${t('tMese')}</label><span>€ ${tE.toFixed(2)}</span></div>
+</div>
+<div class="foot">AF – ${w?w.name:'Ahmed Farag'} × Arti Grafiche M. &amp; G. Pirovano | ${ml}</div>
+<script>window.onload=function(){window.print();setTimeout(()=>window.close(),1500)}<\/script>
+</body></html>`;
+const pw=window.open('','_blank','width=900,height=650');
 if(pw){pw.document.write(printHTML);pw.document.close();}
 }
-function exportCSV(){const rows=getRows();if(!rows.length)return;const m=parseInt(document.getElementById('sel-month').value),y=document.getElementById('sel-year').value;const ml=`${TR[lang].months[m]} ${y}`,w=aw(),dr=getDR(),stdH=S.settings.stdHours||8;const sep=';';const hdr=[t('fDate'),lang==='it'?'Giorno':'اليوم',t('fIn'),t('fOut'),t('fPausa'),lang==='it'?'Ore':'ساعات',t('tOT'),'EUR/h',lang==='it'?'Totale EUR':'الإجمالي',lang==='it'?'Note':'ملاحظة'];let tH=0,tE=0,tOT=0;const dR=rows.map(r=>{const isOff=!!r.off;const h=isOff?0:calcH(r.i,r.o,r.p),e=h*parseFloat(r.r||dr),ot=isOff?0:Math.max(0,h-stdH);tH+=h;tE+=e;tOT+=ot;const dateVal=r.d||r.d2||'';return[dateVal,getDN(dateVal),isOff?'–':r.i,isOff?'–':r.o,isOff?(isAr?'إجازة':'Riposo'):(TR[lang].popt[String(r.p)]||r.p),h.toFixed(2),ot.toFixed(2),isOff?'–':parseFloat(r.r||dr).toFixed(4),e.toFixed(2),r.note||''].join(sep);});const isAr=lang==='ar';const totR=['','','','','',tH.toFixed(2),tOT.toFixed(2),'',tE.toFixed(2),''].join(sep);const csv='\uFEFF'+[hdr.join(sep),...dR,'',totR].join('\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`AF_${(w?w.name:'Ahmed').replace(/\s/g,'_')}_${ml.replace(/\s/g,'_')}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),3000);}
+function exportCSV(){const rows=getRows();if(!rows.length)return;const m=parseInt(document.getElementById('sel-month').value),y=document.getElementById('sel-year').value;const ml=`${TR[lang].months[m]} ${y}`,w=aw(),dr=getDR(),stdH=S.settings.stdHours||8,isAr=lang==='ar';const sep=';';const hdr=[t('fDate'),isAr?'اليوم':'Giorno',t('fIn'),t('fOut'),t('fPausa'),isAr?'Ore':'ساعات',t('tOT'),'EUR/h',isAr?'الإجمالي':'Totale EUR',isAr?'ملاحظة':'Note'];let tH=0,tE=0,tOT=0;const dR=rows.map(r=>{const isOff=!!r.off;const h=isOff?0:calcH(r.i,r.o,r.p),e=h*parseFloat(r.r||dr),ot=isOff?0:Math.max(0,h-stdH);tH+=h;tE+=e;tOT+=ot;const dateVal=r.d||r.d2||'';return[dateVal,getDN(dateVal),isOff?'–':r.i,isOff?'–':r.o,isOff?'–':(TR[lang].popt[String(r.p)]||r.p),h.toFixed(2),ot.toFixed(2),isOff?'–':parseFloat(r.r||dr).toFixed(4),e.toFixed(2),r.note||''].join(sep);});const totR=['','','','','',tH.toFixed(2),tOT.toFixed(2),'',tE.toFixed(2),''].join(sep);const csv='\uFEFF'+[hdr.join(sep),...dR,'',totR].join('\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`AF_${(w?w.name:'Ahmed').replace(/\s/g,'_')}_${ml.replace(/\s/g,'_')}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),3000);}
 function openBackup(){document.getElementById('bk-t').textContent=t('bkT');document.getElementById('bk-exp').textContent=t('bkE');document.getElementById('bk-imp').textContent=t('bkI');document.getElementById('backup-modal').style.display='flex';}
 function closeBackup(){closeModal('backup-modal')}
 function doExport(){const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`AF_Backup_${new Date().toISOString().slice(0,10)}.json`;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),3000);}
